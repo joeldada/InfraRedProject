@@ -1,10 +1,24 @@
 Version 3.2 HI-TECH Software Intermediate Code
+"22 uart.h
+[v _handler_uart_int `(v ~T0 @X0 0 ef ]
 [p mainexit ]
 "8762 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f2550.h
 [v _TRISC0 `Vb ~T0 @X0 0 e@31904 ]
+"16 uart.h
+[v _initUart `(v ~T0 @X0 0 ef ]
+"19
+[v _sendData `(uc ~T0 @X0 0 ef3`*uc`us`uc ]
+"54 C:\Program Files (x86)\Microchip\xc8\v1.41\include\string.h
+[v _strlen `(ui ~T0 @X0 0 ef1`*Cuc ]
+"18 uart.h
+[v _sendByte `(uc ~T0 @X0 0 ef2`uc`uc ]
+"17
+[v _dataAvailable `(uc ~T0 @X0 0 ef ]
+"21
+[v _readData `(uc ~T0 @X0 0 ef2`*uc`us ]
 [t ~ __deprecated__ ]
 [t T16 __deprecated__ ]
-"8468
+"8468 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18f2550.h
 [v _RC0 `Vb ~T16 @X0 0 e@31760 ]
 [v F3312 `(v ~T0 @X0 1 tf1`ul ]
 "161 C:\Program Files (x86)\Microchip\xc8\v1.41\include\pic18.h
@@ -3143,128 +3157,221 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;stdio.h: 190: extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupported("vsscanf() is not supported by this compiler")));
 [; ;stdio.h: 194: extern int sprintf(char *, const char *, ...);
 [; ;stdio.h: 195: extern int printf(const char *, ...);
-"20 infraRedProject.c
-[p x PLLDIV=1 ]
-"21
+[; ;string.h: 14: extern void * memcpy(void *, const void *, size_t);
+[; ;string.h: 15: extern void * memmove(void *, const void *, size_t);
+[; ;string.h: 16: extern void * memset(void *, int, size_t);
+[; ;string.h: 34: extern char * strcat(char *, const char *);
+[; ;string.h: 35: extern char * strcpy(char *, const char *);
+[; ;string.h: 36: extern char * strncat(char *, const char *, size_t);
+[; ;string.h: 37: extern char * strncpy(char *, const char *, size_t);
+[; ;string.h: 38: extern char * strdup(const char *);
+[; ;string.h: 39: extern char * strtok(char *, const char *);
+[; ;string.h: 42: extern int memcmp(const void *, const void *, size_t);
+[; ;string.h: 43: extern int strcmp(const char *, const char *);
+[; ;string.h: 44: extern int stricmp(const char *, const char *);
+[; ;string.h: 45: extern int strncmp(const char *, const char *, size_t);
+[; ;string.h: 46: extern int strnicmp(const char *, const char *, size_t);
+[; ;string.h: 47: extern void * memchr(const void *, int, size_t);
+[; ;string.h: 48: extern size_t strcspn(const char *, const char *);
+[; ;string.h: 49: extern char * strpbrk(const char *, const char *);
+[; ;string.h: 50: extern size_t strspn(const char *, const char *);
+[; ;string.h: 51: extern char * strstr(const char *, const char *);
+[; ;string.h: 52: extern char * stristr(const char *, const char *);
+[; ;string.h: 53: extern char * strerror(int);
+[; ;string.h: 54: extern size_t strlen(const char *);
+[; ;string.h: 55: extern char * strchr(const char *, int);
+[; ;string.h: 56: extern char * strichr(const char *, int);
+[; ;string.h: 57: extern char * strrchr(const char *, int);
+[; ;string.h: 58: extern char * strrichr(const char *, int);
+[; ;uart.h: 16: void initUart(void);
+[; ;uart.h: 17: char dataAvailable(void);
+[; ;uart.h: 18: char sendByte(unsigned char data, unsigned char waitToTx);
+[; ;uart.h: 19: char sendData(unsigned char *data, unsigned short size, unsigned char waitToTx);
+[; ;uart.h: 20: char readByte(unsigned char *data);
+[; ;uart.h: 21: char readData(unsigned char *data, unsigned short size);
+[; ;uart.h: 22: void handler_uart_int(void);
+"22 infraRedProject.c
+[p x PLLDIV=3 ]
+"23
 [p x CPUDIV=OSC1_PLL2 ]
-"22
+"24
 [p x USBDIV=1 ]
-"25
-[p x FOSC=HS ]
-"26
-[p x FCMEN=OFF ]
 "27
+[p x FOSC=HSPLL_HS ]
+"28
+[p x FCMEN=OFF ]
+"29
 [p x IESO=OFF ]
-"30
-[p x PWRT=OFF ]
-"31
-[p x BOR=ON ]
 "32
-[p x BORV=3 ]
+[p x PWRT=OFF ]
 "33
+[p x BOR=ON ]
+"34
+[p x BORV=3 ]
+"35
 [p x VREGEN=OFF ]
-"36
+"38
 [p x WDT=ON ]
-"37
+"39
 [p x WDTPS=32768 ]
-"40
-[p x CCP2MX=ON ]
-"41
-[p x PBADEN=ON ]
 "42
-[p x LPT1OSC=OFF ]
+[p x CCP2MX=ON ]
 "43
+[p x PBADEN=ON ]
+"44
+[p x LPT1OSC=OFF ]
+"45
 [p x MCLRE=ON ]
-"46
-[p x STVREN=ON ]
-"47
-[p x LVP=ON ]
 "48
+[p x STVREN=ON ]
+"49
+[p x LVP=ON ]
+"50
 [p x XINST=OFF ]
-"51
-[p x CP0=OFF ]
-"52
-[p x CP1=OFF ]
 "53
-[p x CP2=OFF ]
+[p x CP0=OFF ]
 "54
+[p x CP1=OFF ]
+"55
+[p x CP2=OFF ]
+"56
 [p x CP3=OFF ]
-"57
+"59
 [p x CPB=OFF ]
-"58
+"60
 [p x CPD=OFF ]
-"61
-[p x WRT0=OFF ]
-"62
-[p x WRT1=OFF ]
 "63
-[p x WRT2=OFF ]
+[p x WRT0=OFF ]
 "64
+[p x WRT1=OFF ]
+"65
+[p x WRT2=OFF ]
+"66
 [p x WRT3=OFF ]
-"67
-[p x WRTC=OFF ]
-"68
-[p x WRTB=OFF ]
 "69
+[p x WRTC=OFF ]
+"70
+[p x WRTB=OFF ]
+"71
 [p x WRTD=OFF ]
-"72
-[p x EBTR0=OFF ]
-"73
-[p x EBTR1=OFF ]
 "74
-[p x EBTR2=OFF ]
+[p x EBTR0=OFF ]
 "75
+[p x EBTR1=OFF ]
+"76
+[p x EBTR2=OFF ]
+"77
 [p x EBTR3=OFF ]
-"78
+"80
 [p x EBTRB=OFF ]
-"83
-[v _main `(i ~T0 @X0 1 ef ]
-"84
+[v F3484 `(v ~T0 @X0 1 tf ]
+"88
+[v _ISR `IF3484 ~T0 @X0 1 e ]
 {
-[; ;infraRedProject.c: 83: int main()
-[; ;infraRedProject.c: 84: {
-[e :U _main ]
+[; ;infraRedProject.c: 88: void interrupt ISR() {
+[e :U _ISR ]
 [f ]
-[; ;infraRedProject.c: 85: TRISC0 = 0;
-"85
-[e = _TRISC0 -> -> 0 `i `b ]
-"86
-[v _freqString `uc ~T0 @X0 -> 20 `i a ]
-"87
-[v _pulseCounter `ui ~T0 @X0 1 a ]
-[; ;infraRedProject.c: 86: unsigned char freqString[20];
-[; ;infraRedProject.c: 87: unsigned int pulseCounter = 10;
-[e = _pulseCounter -> -> 10 `i `ui ]
-[; ;infraRedProject.c: 89: while(1)
+[; ;infraRedProject.c: 89: handler_uart_int();
 "89
-[e :U 325 ]
-[; ;infraRedProject.c: 90: {
+[e ( _handler_uart_int ..  ]
+[; ;infraRedProject.c: 90: }
 "90
-{
-[; ;infraRedProject.c: 91: RC0 = 1;
-"91
-[e = _RC0 -> -> 1 `i `b ]
-[; ;infraRedProject.c: 92: _delay((unsigned long)((1000)*(12000000/4000.0)));
-"92
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 12000000 `l `d .4000.0 `ul ]
-[; ;infraRedProject.c: 93: RC0 = 0;
-"93
-[e = _RC0 -> -> 0 `i `b ]
-[; ;infraRedProject.c: 94: _delay((unsigned long)((1000)*(12000000/4000.0)));
-"94
-[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 12000000 `l `d .4000.0 `ul ]
-"95
-}
-[e :U 324 ]
-"89
-[e $U 325  ]
-[e :U 326 ]
-[; ;infraRedProject.c: 95: }
-[; ;infraRedProject.c: 97: return 0;
-"97
-[e ) -> 0 `i ]
-[e $UE 323  ]
-[; ;infraRedProject.c: 98: }
-"98
 [e :UE 323 ]
 }
+"92
+[v _main `(i ~T0 @X0 1 ef ]
+{
+[; ;infraRedProject.c: 92: int main() {
+[e :U _main ]
+[f ]
+"93
+[v _recLen `uc ~T0 @X0 1 a ]
+[; ;infraRedProject.c: 93: unsigned char recLen = 0;
+[e = _recLen -> -> 0 `i `uc ]
+"94
+[v _recievedBuffer `uc ~T0 @X0 -> 100 `i a ]
+[; ;infraRedProject.c: 94: unsigned char recievedBuffer[100];
+[; ;infraRedProject.c: 96: TRISC0 = 0;
+"96
+[e = _TRISC0 -> -> 0 `i `b ]
+"97
+[v _freqString `uc ~T0 @X0 -> 20 `i a ]
+"98
+[v _pulseCounter `ui ~T0 @X0 1 a ]
+[; ;infraRedProject.c: 97: unsigned char freqString[20];
+[; ;infraRedProject.c: 98: unsigned int pulseCounter = 10;
+[e = _pulseCounter -> -> 10 `i `ui ]
+[; ;infraRedProject.c: 100: initUart();
+"100
+[e ( _initUart ..  ]
+[; ;infraRedProject.c: 101: sendData("This is testing UART", strlen("This is testing UART"), 1);
+"101
+[e ( _sendData (3 , , -> :s 1C `*uc -> ( _strlen (1 :s 2C `us -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 102: sendByte(0x0A, 1);
+"102
+[e ( _sendByte (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 103: sendByte(0x0D, 1);
+"103
+[e ( _sendByte (2 , -> -> 13 `i `uc -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 104: while (1) {
+"104
+[e :U 326 ]
+{
+[; ;infraRedProject.c: 105: if ((recLen = dataAvailable()) > 0) {
+"105
+[e $ ! > -> = _recLen ( _dataAvailable ..  `i -> 0 `i 328  ]
+{
+[; ;infraRedProject.c: 106: readData(recievedBuffer, recLen);
+"106
+[e ( _readData (2 , &U _recievedBuffer -> _recLen `us ]
+[; ;infraRedProject.c: 107: sendData(recievedBuffer, recLen, 1);
+"107
+[e ( _sendData (3 , , &U _recievedBuffer -> _recLen `us -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 108: sendByte(0x0A, 1);
+"108
+[e ( _sendByte (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 109: sendByte(0x0D, 1);
+"109
+[e ( _sendByte (2 , -> -> 13 `i `uc -> -> 1 `i `uc ]
+"110
+}
+[e :U 328 ]
+[; ;infraRedProject.c: 110: }
+[; ;infraRedProject.c: 112: RC0 = 1;
+"112
+[e = _RC0 -> -> 1 `i `b ]
+[; ;infraRedProject.c: 113: _delay((unsigned long)((1000)*(48000000/4000.0)));
+"113
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
+[; ;infraRedProject.c: 114: RC0 = 0;
+"114
+[e = _RC0 -> -> 0 `i `b ]
+[; ;infraRedProject.c: 115: _delay((unsigned long)((1000)*(48000000/4000.0)));
+"115
+[e ( __delay (1 -> * -> -> 1000 `i `d / -> -> 48000000 `l `d .4000.0 `ul ]
+[; ;infraRedProject.c: 116: sendByte(0x48, 1);
+"116
+[e ( _sendByte (2 , -> -> 72 `i `uc -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 117: sendByte(0x0A, 1);
+"117
+[e ( _sendByte (2 , -> -> 10 `i `uc -> -> 1 `i `uc ]
+[; ;infraRedProject.c: 118: sendByte(0x0D, 1);
+"118
+[e ( _sendByte (2 , -> -> 13 `i `uc -> -> 1 `i `uc ]
+"119
+}
+[e :U 325 ]
+"104
+[e $U 326  ]
+[e :U 327 ]
+[; ;infraRedProject.c: 119: }
+[; ;infraRedProject.c: 121: return 0;
+"121
+[e ) -> 0 `i ]
+[e $UE 324  ]
+[; ;infraRedProject.c: 122: }
+"122
+[e :UE 324 ]
+}
+[a 1C 84 104 105 115 32 105 115 32 116 101 115 116 105 110 103 32 85 65 82 84 0 ]
+[a 2C 84 104 105 115 32 105 115 32 116 101 115 116 105 110 103 32 85 65 82 84 0 ]

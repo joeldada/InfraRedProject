@@ -12,17 +12,19 @@
 
 // CONFIG1L
 
-#define _XTAL_FREQ 12000000
+#define _XTAL_FREQ 48000000
 
 #include <xc.h>
 #include <stdio.h>
+#include <string.h>
+#include "uart.h"
 
-#pragma config PLLDIV = 1       // PLL Prescaler Selection bits (No prescale (4 MHz oscillator input drives PLL directly))
+#pragma config PLLDIV = 3       // PLL Prescaler Selection bits (Divide by 3 (12 MHz oscillator input))
 #pragma config CPUDIV = OSC1_PLL2// System Clock Postscaler Selection bits ([Primary Oscillator Src: /1][96 MHz PLL Src: /2])
 #pragma config USBDIV = 1       // USB Clock Selection bit (used in Full-Speed USB mode only; UCFG:FSEN = 1) (USB clock source comes directly from the primary oscillator block with no postscale)
 
 // CONFIG1H
-#pragma config FOSC = HS        // Oscillator Selection bits (HS oscillator (HS))
+#pragma config FOSC = HSPLL_HS  // Oscillator Selection bits (HS oscillator, PLL enabled (HSPLL))
 #pragma config FCMEN = OFF      // Fail-Safe Clock Monitor Enable bit (Fail-Safe Clock Monitor disabled)
 #pragma config IESO = OFF       // Internal/External Oscillator Switchover bit (Oscillator Switchover mode disabled)
 
@@ -80,19 +82,41 @@
 // #pragma config statements should precede project file includes.
 // Use project enums instead of #define for ON and OFF.
 
-int main()
-{
+// #pragma config statements should precede project file includes.
+// Use project enums instead of #define for ON and OFF.
+
+void interrupt ISR() {
+    handler_uart_int();
+}
+
+int main() {
+    unsigned char recLen = 0;
+    unsigned char recievedBuffer[100];
+
     TRISC0 = 0; //RC as Output PIN
     unsigned char freqString[20];
     unsigned int pulseCounter = 10;
-//    sprintf(freqString, "Freq- %i", pulseCounter);
-    while(1)
-    {
+    //sprintf(freqString, "Freq- %i", pulseCounter);
+    initUart();
+    sendData("This is testing UART", strlen("This is testing UART"), 1);
+    sendByte(0x0A, 1);
+    sendByte(0x0D, 1);
+    while (1) {
+        if ((recLen = dataAvailable()) > 0) { // If data is received,
+            readData(recievedBuffer, recLen);
+            sendData(recievedBuffer, recLen, 1);
+            sendByte(0x0A, 1);
+            sendByte(0x0D, 1);
+        }
+
         RC0 = 1;
         __delay_ms(1000);
         RC0 = 0;
         __delay_ms(1000);
+        sendByte(0x48, 1);
+        sendByte(0x0A, 1);
+        sendByte(0x0D, 1);
     }
-    
+
     return 0;
 }
